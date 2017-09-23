@@ -113,12 +113,13 @@ public abstract class CjdrouteConf {
                                 String.format(Locale.ENGLISH, CMD_GENERATE_CJDROUTE_CONF_TEMPLATE, filesDir, filesDir)
                         };
                         InputStream is = null;
+                        Process process = null;
                         try {
                             // Generate new configurations.
-                            Process process = Runtime.getRuntime().exec(cmd);
+                            process = Runtime.getRuntime().exec(cmd);
                             is = process.getInputStream();
-                            JSONObject json = new JSONObject(fromInputStream(is));
-
+                            String jsonString = fromInputStream(is);
+                            JSONObject json = new JSONObject(jsonString);
                             // Get node info.
                             String ipv6 = (String) json.get("ipv6");
                             String publicKey = (String) json.get("publicKey");
@@ -140,6 +141,9 @@ public abstract class CjdrouteConf {
                             }
                         } catch (IOException | JSONException e) {
                             subscriber.onError(e);
+                            is = process.getErrorStream();
+                            String stderr = fromInputStream(is);
+                            System.err.println(stderr);
                         } finally {
                             if (is != null) {
                                 try {

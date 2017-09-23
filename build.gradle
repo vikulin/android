@@ -26,7 +26,7 @@ import org.ajoberstar.gradle.git.tasks.GitClone
 task cloneCjdns(type: GitClone) {
     def destination = file("cjdns-src")
 
-    uri = "https://github.com/benhylau/cjdns"
+    uri = "https://github.com/vikulin/cjdns"
     // Use this repo until patch is merged in cjdelisle/cjdns
     destinationPath = destination
     bare = false
@@ -42,6 +42,12 @@ task copyNativeArtifacts(type: Copy) {
     from 'cjdns-src/build_android/out/*'
     into 'src/main/assets/'
 }
+
+
+//tasks.withType(JavaCompile) {
+//    compileTask -> compileTask.dependsOn cloneCjdns buildCjdns copyNativeArtifacts
+//}
+
 
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
@@ -77,16 +83,16 @@ android {
     }
 }
 
-afterEvaluate {
-    if (COMPILE_CJDNS_NATIVE_ARTIFACTS.toBoolean()) {
-        android.applicationVariants.all { variant ->
-            variant.javaCompiler.dependsOn(cloneCjdns)
-        }
-    }
-}
+//afterEvaluate {
+//    if (COMPILE_CJDNS_NATIVE_ARTIFACTS.toBoolean()) {
+//        android.applicationVariants.all { variant ->
+//            variant.javaCompiler.dependsOn(cloneCjdns)
+//        }
+//    }
+//}
 
-cloneCjdns.finalizedBy(buildCjdns)
-buildCjdns.finalizedBy(copyNativeArtifacts)
+//cloneCjdns.finalizedBy(buildCjdns)
+//buildCjdns.finalizedBy(copyNativeArtifacts)
 
 dependencies {
     compile "com.android.support:support-v4:$supportVersion"
