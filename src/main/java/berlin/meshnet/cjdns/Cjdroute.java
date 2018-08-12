@@ -108,7 +108,8 @@ public abstract class Cjdroute {
 
         @Override
         public Subscriber<JSONObject> execute() {
-            throw new UnsupportedOperationException("Deprecated");
+            //throw new UnsupportedOperationException("Deprecated");
+            return null;
         }
 
         @Override

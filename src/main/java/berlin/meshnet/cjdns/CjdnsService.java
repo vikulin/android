@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -124,7 +123,7 @@ public class CjdnsService extends Service {
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // Build notification.
-        return new NotificationCompat.Builder(this)
+        return new Notification.Builder(this)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle(getString(R.string.cjdns_service_notification_title))
                 .setContentText(text)

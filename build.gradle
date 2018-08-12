@@ -1,7 +1,10 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        google()
     }
 }
 
@@ -9,10 +12,11 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'org.ajoberstar:gradle-git:0.2.3'
     }
 }
@@ -53,11 +57,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
 
 android {
-    buildToolsVersion "25.0.1"
+    buildToolsVersion '27.0.3'
     compileSdkVersion 25
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0.0-SNAPSHOT"
@@ -83,6 +87,8 @@ android {
     }
 }
 
+android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+
 //afterEvaluate {
 //    if (COMPILE_CJDNS_NATIVE_ARTIFACTS.toBoolean()) {
 //        android.applicationVariants.all { variant ->
@@ -93,6 +99,36 @@ android {
 
 //cloneCjdns.finalizedBy(buildCjdns)
 //buildCjdns.finalizedBy(copyNativeArtifacts)
+
+task ndkBuild(type: Exec) {
+    def rootDir = project.rootDir
+    def localProperties = new File(rootDir, "local.properties")
+    Properties properties = new Properties()
+    localProperties.withInputStream { instr ->
+        properties.load(instr)
+    }
+    def ndkDir = properties.getProperty('ndk.dir')
+
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine ndkDir + '\\ndk-build.cmd',
+                'NDK_LIBS_OUT=main/jniLibs',
+                'NDK_PROJECT_PATH='+rootDir+'\\src',
+                'APP_BUILD_SCRIPT=jni\\Android.mk',
+                '-C',
+                file('src').absolutePath
+    } else {
+        commandLine ndkDir + '/ndk-build',
+                'NDK_LIBS_OUT=main/jniLibs',
+                'NDK_PROJECT_PATH='+rootDir+'/src',
+                'APP_BUILD_SCRIPT=jni/Android.mk',
+                '-C',
+                file('src').absolutePath
+    }
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn ndkBuild
+}
 
 dependencies {
     compile "com.android.support:support-v4:$supportVersion"
