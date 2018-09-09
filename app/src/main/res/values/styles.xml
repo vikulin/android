@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MyTheme" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/my_accent</item>
+        <item name="colorPrimary">@color/my_primary</item>
+        <item name="colorPrimaryDark">@color/my_primary_dark</item>
+        <item name="colorControlActivated">@color/my_control_activated</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="android:listSeparatorTextViewStyle">@style/Theme.MyTheme.ListSeparatorTextView</item>
+    </style>
+
+    <!-- Styling Preference list separator for API level below 14 -->
+    <style name="Theme.MyTheme.ListSeparatorTextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/my_accent</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
+    <style name="MyText">
+        <item name="android:textColor">@color/my_accent</item>
+        <item name="android:shadowColor">@color/my_shadow</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">6</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MyText.Large">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="MyText.Small">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MyText.Icon">
+        <item name="android:textColor">@color/my_accent_dark</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:minWidth">22dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyText.Icon.Large">
+        <item name="android:textSize">26dp</item>
+        <item name="android:minWidth">26dp</item>
+    </style>
+
+    <style name="MyText.Icon.Large.Active">
+        <item name="android:textColor">@color/selector_icon_active</item>
+    </style>
+
+    <style name="MyText.Icon.Small">
+        <item name="android:textSize">18dp</item>
+        <item name="android:minWidth">18dp</item>
+    </style>
+
+    <style name="MyText.Icon.Small.Active">
+        <item name="android:textColor">@color/selector_icon_active</item>
+    </style>
+</resources>

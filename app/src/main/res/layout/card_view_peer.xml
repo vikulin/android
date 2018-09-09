@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/global_margin"
+    android:layout_marginRight="@dimen/global_margin"
+    card_view:cardCornerRadius="@dimen/card_radius"
+    card_view:cardBackgroundColor="@color/my_card_background"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/global_padding"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <IconTextView
+                android:id="@+id/peer_card_connections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/global_padding"
+                android:text="@string/peer_card_connections_button"
+                android:visibility="gone"
+                style="@style/MyText.Icon.Small.Active" />
+
+            <TextView
+                android:id="@+id/peer_card_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@id/peer_card_connections"
+                android:layout_toStartOf="@id/peer_card_connections"
+                android:layout_margin="@dimen/global_margin"
+                android:singleLine="true"
+                android:ellipsize="end"
+                style="@style/MyText" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin"
+                android:text="@string/peer_card_address_icon"
+                style="@style/MyText.Icon.Small" />
+
+            <TextView
+                android:id="@+id/peer_card_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin"
+                android:singleLine="true"
+                android:ellipsize="middle"
+                style="@style/MyText.Small" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/peer_card_public_key_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin"
+                android:text="@string/peer_card_public_key_icon"
+                style="@style/MyText.Icon.Small" />
+
+            <TextView
+                android:id="@+id/peer_card_public_key"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/global_margin"
+                android:singleLine="true"
+                android:ellipsize="middle"
+                style="@style/MyText.Small" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
